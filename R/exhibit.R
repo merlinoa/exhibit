@@ -14,7 +14,8 @@ NULL
 #' and \code{lossdb} package functions for presentation in a report.  
 #' 
 #' @param object object to turn into exhibit
+#' @param format whether or not to use default `exhibit` format
 #' @param ... additional arguments
 #' 
 #' @export
-exhibit <- function(odject, ...) UseMethod("exhibit")
+exhibit <- function(odject, format = TRUE, ...) UseMethod("exhibit")
