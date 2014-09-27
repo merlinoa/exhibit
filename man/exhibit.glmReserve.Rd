@@ -3,10 +3,12 @@
 \alias{exhibit.glmReserve}
 \title{Returns glmReserve summary information in a data frame}
 \usage{
-\method{exhibit}{glmReserve}(object)
+\method{exhibit}{glmReserve}(object, format = TRUE)
 }
 \arguments{
 \item{object}{object of class glmReserve generate from \code{ChainLadder} package}
+
+\item{format}{whether or not to use default exhibit format}
 }
 \description{
 Returns glmReserve summary information in a data frame
@@ -18,5 +20,6 @@ tri <- as.triangle(recovery_ldf, origin = "origin",
 glm_object <- glmReserve(tri)
 
 exhibit(glm_object)
+exhibit(glm_object, format = FALSE)
 }
 
