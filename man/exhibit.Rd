@@ -5,9 +5,11 @@
 \alias{exhibit-package}
 \title{The exhibit package.}
 \usage{
-exhibit(odject, ...)
+exhibit(odject, format = TRUE, ...)
 }
 \arguments{
+\item{format}{whether or not to use default `exhibit` format}
+
 \item{...}{additional arguments}
 
 \item{object}{object to turn into exhibit}
