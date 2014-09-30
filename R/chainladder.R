@@ -83,7 +83,7 @@ exhibit.triangle <- function(object, format = TRUE) {
 
 #' Returns glmReserve summary information in a data frame
 #'
-#' @param object object of class glmReserve generate from \code{ChainLadder} package
+#' @param object object of class glmReserve generated from \code{ChainLadder} package
 #' @param format whether or not to use default exhibit format
 #' 
 #' @method exhibit glmReserve
@@ -125,5 +125,82 @@ exhibit.glmReserve <- function(object, format = TRUE) {
   # set rownames
   rownames(xhbt) <- c(as.character(as.numeric(rownames(xhbt)[2]) - 1), rownames(xhbt)[2:(length(rownames(xhbt)) - 1)],
                       "totals:")
+  xhbt
+}
+
+
+
+
+#' Returns BootChainLadder summary information in a data frame
+#'
+#' @param object object of class BootChainLadder generated from \code{ChainLadder} package
+#' @param format whether or not to use default exhibit format
+#' 
+#' @method exhibit BootChainLadder
+#' 
+#' @export
+#' 
+#' @examples
+#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#'                    dev = "dev", value = "paid_loss_only")
+#'                    
+#' boot_object <- BootChainLadder(tri)
+#' 
+#' exhibit(boot_object)
+#' exhibit(boot_object, format = FALSE)
+exhibit.BootChainLadder <- function(object, format = TRUE) {
+  # use first object in generic summary
+  xhbt <- summary(object)[[1]]
+  
+  # retreive totals
+  totals <- as.data.frame(t(summary(object)[[2]]))
+  names(totals) <- names(xhbt)
+  
+  # combine data frames
+  xhbt <- rbind(xhbt, totals)
+  
+  # format columns
+  if (format) {
+    xhbt <- format(round(xhbt, 0), big.mark = ",")
+  }
+
+  xhbt
+}
+
+#' Returns MackChainLadder summary information in a data frame
+#'
+#' @param object object of class MackChainLadder generated from \code{ChainLadder} package
+#' @param format whether or not to use default exhibit format
+#' 
+#' @method exhibit MackChainLadder
+#' 
+#' @export
+#' 
+#' @examples
+#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#'                    dev = "dev", value = "paid_loss_only")
+#'                    
+#' mack_object <- MackChainLadder(tri)
+#' 
+#' exhibit(mack_object)
+#' exhibit(mack_object, format = FALSE)
+exhibit.MackChainLadder <- function(object, format = TRUE) {
+  # use first object in generic summary
+  xhbt <- summary(object)[[1]][, 1:5]
+  
+  # retreive totals
+  totals <- as.data.frame(t(summary(object)[[2]]))
+  totals <- totals[, 1:5]
+  names(totals) <- names(xhbt)
+  
+  # combine data frames
+  xhbt <- rbind(xhbt, totals)
+  
+  # format columns
+  if (format) {
+    xhbt[, c(1, 3:5)] <- format(round(xhbt[, c(1, 3:5)], 0), big.mark = ",")
+    xhbt[, 2] <- format(round(xhbt[, 2], 3), digits = 3, nsmall = 3)
+  }
+  
   xhbt
 }

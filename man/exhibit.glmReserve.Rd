@@ -6,7 +6,7 @@
 \method{exhibit}{glmReserve}(object, format = TRUE)
 }
 \arguments{
-\item{object}{object of class glmReserve generate from \code{ChainLadder} package}
+\item{object}{object of class glmReserve generated from \code{ChainLadder} package}
 
 \item{format}{whether or not to use default exhibit format}
 }
