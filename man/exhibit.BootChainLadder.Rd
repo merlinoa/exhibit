@@ -3,12 +3,12 @@
 \alias{exhibit.BootChainLadder}
 \title{Returns BootChainLadder summary information in a data frame}
 \usage{
-\method{exhibit}{BootChainLadder}(object, format = TRUE)
+\method{exhibit}{BootChainLadder}(object, eformat = FALSE)
 }
 \arguments{
 \item{object}{object of class BootChainLadder generated from \code{ChainLadder} package}
 
-\item{format}{whether or not to use default exhibit format}
+\item{eformat}{logical; whether or not to use default exhibit format}
 }
 \description{
 Returns BootChainLadder summary information in a data frame

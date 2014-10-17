@@ -3,12 +3,12 @@
 \alias{exhibit.glmReserve}
 \title{Returns glmReserve summary information in a data frame}
 \usage{
-\method{exhibit}{glmReserve}(object, format = TRUE)
+\method{exhibit}{glmReserve}(object, format = FALSE)
 }
 \arguments{
 \item{object}{object of class glmReserve generated from \code{ChainLadder} package}
 
-\item{format}{whether or not to use default exhibit format}
+\item{eformat}{logical; whether or not to use default exhibit format}
 }
 \description{
 Returns glmReserve summary information in a data frame

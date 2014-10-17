@@ -5,7 +5,7 @@
 \alias{exhibit-package}
 \title{The exhibit package.}
 \usage{
-exhibit(odject, format = TRUE, ...)
+exhibit(oject, format = TRUE, ...)
 }
 \arguments{
 \item{format}{whether or not to use default `exhibit` format}

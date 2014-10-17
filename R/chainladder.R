@@ -1,7 +1,7 @@
 #' Return a triangle for age to age development factors
 #' 
 #' @param ata object of class ata generated from \code{ChainLadder} package
-#' @param format whether or not to use default exhibit format
+#' @param eformat logical; whether or not to use default exhibit format
 #' @param selection optional selected development factors
 #' @param tail_column optional column for development factor of 
 #' most mature age to ultimate
@@ -17,7 +17,10 @@
 #' 
 #' # with tail factor selected
 #' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, 1.1))
-exhibit.ata <- function(object, format = TRUE, selection = NULL, tail_column = FALSE) {
+exhibit.ata <- function(object, 
+                        eformat = FALSE, 
+                        selection = NULL, 
+                        tail_column = FALSE) {
   
   # extract development table from ata object
   xhbt <- as.data.frame(object[1:nrow(object), 1:ncol(object)])
@@ -43,9 +46,10 @@ exhibit.ata <- function(object, format = TRUE, selection = NULL, tail_column = F
                   sel = selection)
   }
   
+  class(xhbt) <- c("exhibit_ata", "data.frame")
   # format the values for presentation
-  if (format) {
-    format(round(xhbt, 3), digits = 3, nsmall = 3)
+  if (eformat) {
+    eformat(xhbt)
   } else {
     xhbt
   }
@@ -54,7 +58,7 @@ exhibit.ata <- function(object, format = TRUE, selection = NULL, tail_column = F
 #' Returns a cleaner development triangle for use in reports
 #' 
 #' @param object object of class triangle generated from \code{ChainLadder} package
-#' @param format whether or not to use default exhibit format
+#' @param eformat logical; whether or not to use default exhibit format
 #' 
 #' @method exhibit triangle
 #' 
@@ -66,15 +70,17 @@ exhibit.ata <- function(object, format = TRUE, selection = NULL, tail_column = F
 #'                    
 #' exhibit(tri)
 #' exhibit(tri, format = FALSE)
-exhibit.triangle <- function(object, format = TRUE) {
+exhibit.triangle <- function(object, eformat = FALSE) {
   
   # extract relevant data from triangle
   xhbt <- object[1:nrow(object), 1:ncol(object)]
   xhbt <- as.data.frame(xhbt)
   names(xhbt) <- attr(object, "dimnames")[[2]]
   
-  if (format) {
-    format(xhbt, big.mark = ",")
+  class(xhbt) <- c("exhibit_triangle", "data.frame")
+  
+  if (eformat) {
+    eformat(xhbt)
   } else {
     xhbt
   }
@@ -84,7 +90,7 @@ exhibit.triangle <- function(object, format = TRUE) {
 #' Returns glmReserve summary information in a data frame
 #'
 #' @param object object of class glmReserve generated from \code{ChainLadder} package
-#' @param format whether or not to use default exhibit format
+#' @param eformat logical; whether or not to use default exhibit format
 #' 
 #' @method exhibit glmReserve
 #' 
@@ -98,7 +104,7 @@ exhibit.triangle <- function(object, format = TRUE) {
 #' 
 #' exhibit(glm_object)
 #' exhibit(glm_object, format = FALSE)
-exhibit.glmReserve <- function(object, format = TRUE) {
+exhibit.glmReserve <- function(object, format = FALSE) {
   xhbt <- object$summary
   
   # extract latest development of first origin year
@@ -116,25 +122,23 @@ exhibit.glmReserve <- function(object, format = TRUE) {
   totals <- as.data.frame(totals)
   names(totals) <- names(xhbt)
   xhbt <- rbind(xhbt, totals)
-
-  # format columns
-  if (format) {
-    xhbt[, c(1, 3, 4, 5)] <- format(round(xhbt[, c(1, 3, 4, 5)], 0), big.mark = ",")
-    xhbt[, c(2, 6)] <- format(xhbt[, c(2, 6)], nsmall = 3, digits = 3)
-  }
-  # set rownames
-  rownames(xhbt) <- c(as.character(as.numeric(rownames(xhbt)[2]) - 1), rownames(xhbt)[2:(length(rownames(xhbt)) - 1)],
+  
+  rownames(xhbt) <- c(as.character(as.numeric(rownames(xhbt)[2]) - 1), 
+                      rownames(xhbt)[2:(length(rownames(xhbt)) - 1)],
                       "totals:")
+  
+  class(xhbt) <- c("exhbit_glmReserve", "data.frame")
+  # format columns
+  if (eformat) {
+    xhbt <- eformat(xhbt)
+  }
   xhbt
 }
-
-
-
 
 #' Returns BootChainLadder summary information in a data frame
 #'
 #' @param object object of class BootChainLadder generated from \code{ChainLadder} package
-#' @param format whether or not to use default exhibit format
+#' @param eformat logical; whether or not to use default exhibit format
 #' 
 #' @method exhibit BootChainLadder
 #' 
@@ -148,7 +152,7 @@ exhibit.glmReserve <- function(object, format = TRUE) {
 #' 
 #' exhibit(boot_object)
 #' exhibit(boot_object, format = FALSE)
-exhibit.BootChainLadder <- function(object, format = TRUE) {
+exhibit.BootChainLadder <- function(object, eformat = FALSE) {
   # use first object in generic summary
   xhbt <- summary(object)[[1]]
   
@@ -159,18 +163,20 @@ exhibit.BootChainLadder <- function(object, format = TRUE) {
   # combine data frames
   xhbt <- rbind(xhbt, totals)
   
+  class(xhbt) <- c("exhibit_BootChainLadder", "data.frame")
+  
   # format columns
-  if (format) {
-    xhbt <- format(round(xhbt, 0), big.mark = ",")
+  if (eformat) {
+    xhbt <- eformat(round(xhbt, 0), big.mark = ",")
   }
-
+  
   xhbt
 }
 
 #' Returns MackChainLadder summary information in a data frame
 #'
 #' @param object object of class MackChainLadder generated from \code{ChainLadder} package
-#' @param format whether or not to use default exhibit format
+#' @param eformat whether or not to use default exhibit format
 #' 
 #' @method exhibit MackChainLadder
 #' 
@@ -184,7 +190,7 @@ exhibit.BootChainLadder <- function(object, format = TRUE) {
 #' 
 #' exhibit(mack_object)
 #' exhibit(mack_object, format = FALSE)
-exhibit.MackChainLadder <- function(object, format = TRUE) {
+exhibit.MackChainLadder <- function(object, eformat = FALSE) {
   # use first object in generic summary
   xhbt <- summary(object)[[1]][, 1:5]
   
@@ -196,10 +202,10 @@ exhibit.MackChainLadder <- function(object, format = TRUE) {
   # combine data frames
   xhbt <- rbind(xhbt, totals)
   
+  class(xhbt) <- c("exhibit_MackChainLadder", "data.frame")
   # format columns
-  if (format) {
-    xhbt[, c(1, 3:5)] <- format(round(xhbt[, c(1, 3:5)], 0), big.mark = ",")
-    xhbt[, 2] <- format(round(xhbt[, 2], 3), digits = 3, nsmall = 3)
+  if (eformat) {
+    xhbt <- eformat(xhbt)
   }
   
   xhbt

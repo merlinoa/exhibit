@@ -3,11 +3,11 @@
 \alias{exhibit.ata}
 \title{Return a triangle for age to age development factors}
 \usage{
-\method{exhibit}{ata}(object, format = TRUE, selection = NULL,
+\method{exhibit}{ata}(object, eformat = FALSE, selection = NULL,
   tail_column = FALSE)
 }
 \arguments{
-\item{format}{whether or not to use default exhibit format}
+\item{eformat}{logical; whether or not to use default exhibit format}
 
 \item{selection}{optional selected development factors}
 

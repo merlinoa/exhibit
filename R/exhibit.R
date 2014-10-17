@@ -18,4 +18,4 @@ NULL
 #' @param ... additional arguments
 #' 
 #' @export
-exhibit <- function(odject, format = TRUE, ...) UseMethod("exhibit")
+exhibit <- function(oject, format = TRUE, ...) UseMethod("exhibit")

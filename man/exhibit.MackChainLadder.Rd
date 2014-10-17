@@ -3,12 +3,12 @@
 \alias{exhibit.MackChainLadder}
 \title{Returns MackChainLadder summary information in a data frame}
 \usage{
-\method{exhibit}{MackChainLadder}(object, format = TRUE)
+\method{exhibit}{MackChainLadder}(object, eformat = FALSE)
 }
 \arguments{
 \item{object}{object of class MackChainLadder generated from \code{ChainLadder} package}
 
-\item{format}{whether or not to use default exhibit format}
+\item{eformat}{whether or not to use default exhibit format}
 }
 \description{
 Returns MackChainLadder summary information in a data frame

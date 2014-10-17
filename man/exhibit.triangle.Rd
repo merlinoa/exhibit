@@ -3,12 +3,12 @@
 \alias{exhibit.triangle}
 \title{Returns a cleaner development triangle for use in reports}
 \usage{
-\method{exhibit}{triangle}(object, format = TRUE)
+\method{exhibit}{triangle}(object, eformat = FALSE)
 }
 \arguments{
 \item{object}{object of class triangle generated from \code{ChainLadder} package}
 
-\item{format}{whether or not to use default exhibit format}
+\item{eformat}{logical; whether or not to use default exhibit format}
 }
 \description{
 Returns a cleaner development triangle for use in reports
