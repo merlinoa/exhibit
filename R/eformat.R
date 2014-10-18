@@ -8,6 +8,37 @@
 #' @export
 eformat <- function(object) UseMethod("eformat")
 
+#'@method eformat data.frame
+#'@export
+eformat.data.frame <- function(object) {
+  object[] <- lapply(object, guess_format)
+  object
+}
+
+#'Guess the desired format of a column
+guess_format <- function(column) {
+  
+  # do not format non numeric columns
+  if (!is.numeric(column)) return(column)
+  
+  # mean value in column greater than 50 column holds dollar values
+  if (mean(column) >= 50) {
+    return(format(round(column, 0), big.mark = ",", ))
+  }
+  
+  # For ratio columns and low claim counts columns
+  if (mean(column) < 50) {
+    # claim count columns are likely to be integer columns
+    if (is.integer(column)) {
+      return(format(round(column, 0), big.mark = ",", ))
+    } else {
+      return(format(column, digits = 3, nsmall = 3))
+    }
+  }
+}
+
+
+
 #'@method eformat exhibit_ata
 #'@export
 eformat.exhibit_ata <- function(object) {
