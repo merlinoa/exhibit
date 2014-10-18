@@ -23,8 +23,14 @@ guess_format <- function(column) {
   
   # mean value in column greater than 50 column holds dollar values
   if (mean(column) >= 50) {
-    return(format(round(column, 0), big.mark = ",", ))
+    # for origin year columns
+    if (mean(column) > 1975 && mean(column) < 2015) {
+      return(round(column, 0))
+    } else {
+      return(format(round(column, 0), big.mark = ",", ))
+    }
   }
+  
   
   # For ratio columns and low claim counts columns
   if (mean(column) < 50) {
