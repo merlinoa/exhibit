@@ -26,7 +26,7 @@ eformat.exhibit_triangle <- function(object) {
 eformat.exhibit_glmReserve <- function(object) {
   object[, c(1, 3, 4, 5)] <- format(round(object[, c(1, 3, 4, 5)], 0), 
                                     big.mark = ",")
-  object[, c(2, 6)] <- formatC(object[, c(2, 6)], digits = 3, nsmall = 3)
+  object[, c(2, 6)] <- format(object[, c(2, 6)], digits = 3, nsmall = 3)
   object
 }
 

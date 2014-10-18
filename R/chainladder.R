@@ -104,12 +104,13 @@ exhibit.triangle <- function(object, eformat = FALSE) {
 #' 
 #' exhibit(glm_object)
 #' exhibit(glm_object, format = FALSE)
-exhibit.glmReserve <- function(object, format = FALSE) {
+exhibit.glmReserve <- function(object, eformat = FALSE) {
   xhbt <- object$summary
   
   # extract latest development of first origin year
   latest_first_ay <- object$Triangle[1, ncol(object$Triangle)]
-  first_ay <- c("Latest" = latest_first_ay, 1, "Ultimate" = latest_first_ay, "IBNR" = 0, "S.E." = NA, "CV" = NA)
+  first_ay <- c("Latest" = latest_first_ay, 1, "Ultimate" = latest_first_ay, 
+                "IBNR" = 0, "S.E." = NA, "CV" = NA)
   
   # create copy of provided totals row
   totals_p <- xhbt[nrow(xhbt), ]
@@ -127,7 +128,7 @@ exhibit.glmReserve <- function(object, format = FALSE) {
                       rownames(xhbt)[2:(length(rownames(xhbt)) - 1)],
                       "totals:")
   
-  class(xhbt) <- c("exhbit_glmReserve", "data.frame")
+  class(xhbt) <- c("exhibit_glmReserve", "data.frame")
   # format columns
   if (eformat) {
     xhbt <- eformat(xhbt)
