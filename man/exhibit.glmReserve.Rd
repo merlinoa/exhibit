@@ -3,7 +3,7 @@
 \alias{exhibit.glmReserve}
 \title{Returns glmReserve summary information in a data frame}
 \usage{
-\method{exhibit}{glmReserve}(object, format = FALSE)
+\method{exhibit}{glmReserve}(object, eformat = FALSE)
 }
 \arguments{
 \item{object}{object of class glmReserve generated from \code{ChainLadder} package}
