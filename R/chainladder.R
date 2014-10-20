@@ -119,7 +119,8 @@ exhibit.glmReserve <- function(object, eformat = FALSE) {
   xhbt <- rbind(first_ay, xhbt[1:(nrow(xhbt) - 1), ])
   
   # create totals row that includes data from first accident year
-  totals <- c(sum(xhbt[, "Latest"]), sum(xhbt[, "Latest"]) / sum(xhbt[, "Ultimate"]), totals_p[3:6])
+  totals <- c(sum(xhbt[, "Latest"]), sum(xhbt[, "Latest"]) / sum(xhbt[, "Ultimate"]), 
+              sum(xhbt[, "Ultimate"]), totals_p[4:6])
   totals <- as.data.frame(totals)
   names(totals) <- names(xhbt)
   xhbt <- rbind(xhbt, totals)
