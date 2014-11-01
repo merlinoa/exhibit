@@ -49,6 +49,8 @@ guess_format <- function(column) {
 #'@export
 eformat.exhibit_ata <- function(object) {
   format(object, digits = 3, nsmall = 3)
+  object[is.na(object)] <- ""
+  object
 }
 
 
@@ -56,6 +58,8 @@ eformat.exhibit_ata <- function(object) {
 #'@export
 eformat.exhibit_triangle <- function(object) {
   format(round(object, 0), big.mark = ",")
+  object[is.na(object)] <- ""
+  object
 }
 
 #'@method eformat exhibit_glmReserve
