@@ -23,30 +23,31 @@ exhibit.ata <- function(object,
                         tail_column = FALSE) {
   
   # extract development table from ata object
-  xhbt <- as.data.frame(object[1:nrow(object), 1:ncol(object)])
+  xhbt <- object[1:nrow(object), 1:ncol(object)]
   
   if (tail_column) {
     # create name for final column
     final_col_name <- paste0(ncol(xhbt) + 1, "-Ult.")
     
     # create final column
-    final_col <- data.frame(rep(NA, times = nrow(xhbt)))
-    names(final_col) <- final_col_name
+    final_col <- rep(NA, times = nrow(xhbt))
     
     # add final column to exhibit
     xhbt <- cbind(xhbt, final_col)
+    colnames(xhbt)[ncol(xhbt)] <- final_col_name
+    
     xhbt <- rbind(xhbt, 
-                  smpl = c(attr(object, "smpl"), NA),
-                  wtd = c(attr(object, "vwtd"), NA),
-                  sel = selection)
+                  Simple = c(attr(object, "smpl"), NA),
+                  Weighted = c(attr(object, "vwtd"), NA),
+                  Selected = selection)
   } else {
     xhbt <- rbind(xhbt,
-                  smpl = c(attr(object, "smpl")),
-                  wtd = c(attr(object, "vwtd")),
-                  sel = selection)
+                  Simple = c(attr(object, "smpl")),
+                  Weighted = c(attr(object, "vwtd")),
+                  Selected = selection)
   }
   
-  class(xhbt) <- c("exhibit_ata", "data.frame")
+  class(xhbt) <- c("exhibit_ata", "matrix")
   # format the values for presentation
   if (eformat) {
     eformat(xhbt)
@@ -74,10 +75,9 @@ exhibit.triangle <- function(object, eformat = FALSE) {
   
   # extract relevant data from triangle
   xhbt <- object[1:nrow(object), 1:ncol(object)]
-  xhbt <- as.data.frame(xhbt)
   names(xhbt) <- attr(object, "dimnames")[[2]]
   
-  class(xhbt) <- c("exhibit_triangle", "data.frame")
+  class(xhbt) <- c("exhibit_triangle", "matrix")
   
   if (eformat) {
     eformat(xhbt)
