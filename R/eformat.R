@@ -4,14 +4,27 @@
 #' objects created by functions in the exhibit function.
 #' 
 #' @param object output of exhibit function to format
+#' @param ... other options
 #' 
 #' @export
-eformat <- function(object) UseMethod("eformat")
+eformat <- function(object, ...) UseMethod("eformat")
 
+#'Guess desired format for data frame
+#'
 #'@method eformat data.frame
+#'
+#'@param object data frame to format
+#'@param colnames alternative column names
+#'
 #'@export
-eformat.data.frame <- function(object) {
+eformat.data.frame <- function(object, colnames = NULL) {
   object[] <- lapply(object, guess_format)
+  
+  # change colnames if desired
+  if (!is.null(colnames)) {
+    colnames(object) <- colnames
+  }
+  
   object
 }
 

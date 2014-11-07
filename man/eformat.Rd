@@ -3,10 +3,12 @@
 \alias{eformat}
 \title{Default formats for the exhibit function}
 \usage{
-eformat(object)
+eformat(object, ...)
 }
 \arguments{
 \item{object}{output of exhibit function to format}
+
+\item{...}{other options}
 }
 \description{
 \code{eformat} defines certain default ways to format

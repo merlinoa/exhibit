@@ -47,13 +47,15 @@ exhibit.ata <- function(object,
                   Selected = selection)
   }
   
+  #set class
   class(xhbt) <- c("exhibit_ata", "matrix")
+  
   # format the values for presentation
   if (eformat) {
-    eformat(xhbt)
-  } else {
-    xhbt
+    xhbt <- eformat(xhbt)
   }
+  
+  xhbt
 }
 
 #' Returns a cleaner development triangle for use in reports
