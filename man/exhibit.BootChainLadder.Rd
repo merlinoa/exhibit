@@ -3,7 +3,7 @@
 \alias{exhibit.BootChainLadder}
 \title{Returns BootChainLadder summary information in a data frame}
 \usage{
-\method{exhibit}{BootChainLadder}(object, eformat = FALSE)
+\method{exhibit}{BootChainLadder}(object)
 }
 \arguments{
 \item{object}{object of class BootChainLadder generated from \code{ChainLadder} package}
@@ -14,12 +14,11 @@
 Returns BootChainLadder summary information in a data frame
 }
 \examples{
-tri <- as.triangle(recovery_ldf, origin = "origin",
+tri <- as.triangle(ldf_data, origin = "origin",
                    dev = "dev", value = "paid_loss_only")
 
 boot_object <- BootChainLadder(tri)
 
 exhibit(boot_object)
-exhibit(boot_object, format = FALSE)
 }
 

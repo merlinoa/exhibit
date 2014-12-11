@@ -3,7 +3,7 @@
 \alias{exhibit.MackChainLadder}
 \title{Returns MackChainLadder summary information in a data frame}
 \usage{
-\method{exhibit}{MackChainLadder}(object, eformat = FALSE)
+\method{exhibit}{MackChainLadder}(object)
 }
 \arguments{
 \item{object}{object of class MackChainLadder generated from \code{ChainLadder} package}
@@ -14,12 +14,11 @@
 Returns MackChainLadder summary information in a data frame
 }
 \examples{
-tri <- as.triangle(recovery_ldf, origin = "origin",
+tri <- as.triangle(ldf_data, origin = "origin",
                    dev = "dev", value = "paid_loss_only")
 
 mack_object <- MackChainLadder(tri)
 
 exhibit(mack_object)
-exhibit(mack_object, format = FALSE)
 }
 

@@ -21,4 +21,10 @@ The exhibit package.
 objects returned by the package \code{ChainLadder} package
 and \code{lossdb} package functions for presentation in a report.
 }
+\details{
+Many packages in R return list data structures that contain
+a lot more information than is usually needed.  \code{exhibit} returns
+a summary of this output as a data frame that can be easily displayed as
+a table in a pdf or html document.
+}
 

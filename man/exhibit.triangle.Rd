@@ -3,7 +3,7 @@
 \alias{exhibit.triangle}
 \title{Returns a cleaner development triangle for use in reports}
 \usage{
-\method{exhibit}{triangle}(object, eformat = FALSE)
+\method{exhibit}{triangle}(object)
 }
 \arguments{
 \item{object}{object of class triangle generated from \code{ChainLadder} package}
@@ -14,10 +14,9 @@
 Returns a cleaner development triangle for use in reports
 }
 \examples{
-tri <- as.triangle(recovery_ldf, origin = "origin",
+tri <- as.triangle(ldf_data, origin = "origin",
                    dev = "dev", value = "paid_loss_only")
 
 exhibit(tri)
-exhibit(tri, format = FALSE)
 }
 

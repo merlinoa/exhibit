@@ -1,58 +1,58 @@
 #' Return a triangle for age to age development factors
 #' 
 #' @param ata object of class ata generated from \code{ChainLadder} package
-#' @param eformat logical; whether or not to use default exhibit format
-#' @param selection optional selected development factors
-#' @param tail_column optional column for development factor of 
-#' most mature age to ultimate
+#' @param selection optional selected development factors.  Should be supplied
+#' as a numeric vector of the same length as the number of development periods
+#' in the ata development triengle or the number of developments + 1 in the ata
+#' development triengle, with the + 1 for the tail factor.  The tail factor can be
+#' used to project future development for the most mature origin years.
 #' 
 #' @method exhibit ata
 #' 
 #' @export
 #' @examples
-#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#' tri <- as.triangle(ldf_data, origin = "origin", 
 #'                    dev = "dev", value = "paid_loss_only")
 #' dev_tri <- ata(tri)
-#' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, NA))
+#' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075))
 #' 
 #' # with tail factor selected
 #' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, 1.1))
 exhibit.ata <- function(object, 
-                        eformat = FALSE, 
-                        selection = NULL, 
-                        tail_column = FALSE) {
+                        selection = NULL) {
   
   # extract development table from ata object
   xhbt <- object[1:nrow(object), 1:ncol(object)]
   
-  if (tail_column) {
-    # create name for final column
-    final_col_name <- paste0(ncol(xhbt) + 1, "-Ult.")
-    
-    # create final column
-    final_col <- rep(NA, times = nrow(xhbt))
-    
-    # add final column to exhibit
-    xhbt <- cbind(xhbt, final_col)
-    colnames(xhbt)[ncol(xhbt)] <- final_col_name
-    
-    xhbt <- rbind(xhbt, 
-                  Simple = c(attr(object, "smpl"), NA),
-                  Weighted = c(attr(object, "vwtd"), NA),
-                  Selected = selection)
-  } else {
+  if (is.null(selection)) {
     xhbt <- rbind(xhbt,
                   Simple = c(attr(object, "smpl")),
-                  Weighted = c(attr(object, "vwtd")),
-                  Selected = selection)
-  }
-  
-  #set class
-  class(xhbt) <- c("exhibit_ata", "matrix")
-  
-  # format the values for presentation
-  if (eformat) {
-    xhbt <- eformat(xhbt)
+                  Weighted = c(attr(object, "vwtd")))
+  } else {
+    if (length(selection) == (ncol(xhbt) + 1)) {
+      # create name for final column
+      final_col_name <- paste0(ncol(xhbt) + 1, "-Ult.")
+    
+      # create final column
+      final_col <- rep(NA, times = nrow(xhbt))
+    
+      # add final column to exhibit
+      xhbt <- cbind(xhbt, final_col)
+      colnames(xhbt)[ncol(xhbt)] <- final_col_name
+    
+      xhbt <- rbind(xhbt, 
+                    Simple = c(attr(object, "smpl"), NA),
+                    Weighted = c(attr(object, "vwtd"), NA),
+                    Selected = selection)
+    } else if (length(selection) == ncol(xhbt)) {
+      xhbt <- rbind(xhbt,
+                    Simple = c(attr(object, "smpl")),
+                    Weighted = c(attr(object, "vwtd")),
+                    Selected = selection)
+      } else {
+        stop("the `selection` parameter must be a vector of length ncol(`object`) or 
+             (ncol(`object`) + 1)")
+    }
   }
   
   xhbt
@@ -68,24 +68,17 @@ exhibit.ata <- function(object,
 #' @export
 #' 
 #' @examples
-#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#' tri <- as.triangle(ldf_data, origin = "origin", 
 #'                    dev = "dev", value = "paid_loss_only")
 #'                    
 #' exhibit(tri)
-#' exhibit(tri, format = FALSE)
-exhibit.triangle <- function(object, eformat = FALSE) {
+exhibit.triangle <- function(object) {
   
   # extract relevant data from triangle
   xhbt <- object[1:nrow(object), 1:ncol(object)]
   names(xhbt) <- attr(object, "dimnames")[[2]]
   
-  class(xhbt) <- c("exhibit_triangle", "matrix")
-  
-  if (eformat) {
-    eformat(xhbt)
-  } else {
-    xhbt
-  }
+  xhbt
 }
 
 
@@ -99,14 +92,13 @@ exhibit.triangle <- function(object, eformat = FALSE) {
 #' @export
 #' 
 #' @examples
-#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#' tri <- as.triangle(ldf_data, origin = "origin", 
 #'                    dev = "dev", value = "paid_loss_only")
 #'                    
 #' glm_object <- glmReserve(tri)
 #' 
 #' exhibit(glm_object)
-#' exhibit(glm_object, format = FALSE)
-exhibit.glmReserve <- function(object, eformat = FALSE) {
+exhibit.glmReserve <- function(object) {
   xhbt <- object$summary
   
   # extract latest development of first origin year
@@ -131,11 +123,6 @@ exhibit.glmReserve <- function(object, eformat = FALSE) {
                       rownames(xhbt)[2:(length(rownames(xhbt)) - 1)],
                       "totals:")
   
-  class(xhbt) <- c("exhibit_glmReserve", "data.frame")
-  # format columns
-  if (eformat) {
-    xhbt <- eformat(xhbt)
-  }
   xhbt
 }
 
@@ -149,14 +136,13 @@ exhibit.glmReserve <- function(object, eformat = FALSE) {
 #' @export
 #' 
 #' @examples
-#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#' tri <- as.triangle(ldf_data, origin = "origin", 
 #'                    dev = "dev", value = "paid_loss_only")
 #'                    
 #' boot_object <- BootChainLadder(tri)
 #' 
 #' exhibit(boot_object)
-#' exhibit(boot_object, format = FALSE)
-exhibit.BootChainLadder <- function(object, eformat = FALSE) {
+exhibit.BootChainLadder <- function(object) {
   # use first object in generic summary
   xhbt <- summary(object)[[1]]
   
@@ -166,13 +152,6 @@ exhibit.BootChainLadder <- function(object, eformat = FALSE) {
   
   # combine data frames
   xhbt <- rbind(xhbt, totals)
-  
-  class(xhbt) <- c("exhibit_BootChainLadder", "data.frame")
-  
-  # format columns
-  if (eformat) {
-    xhbt <- eformat(round(xhbt, 0), big.mark = ",")
-  }
   
   xhbt
 }
@@ -187,14 +166,13 @@ exhibit.BootChainLadder <- function(object, eformat = FALSE) {
 #' @export
 #' 
 #' @examples
-#' tri <- as.triangle(recovery_ldf, origin = "origin", 
+#' tri <- as.triangle(ldf_data, origin = "origin", 
 #'                    dev = "dev", value = "paid_loss_only")
 #'                    
 #' mack_object <- MackChainLadder(tri)
 #' 
 #' exhibit(mack_object)
-#' exhibit(mack_object, format = FALSE)
-exhibit.MackChainLadder <- function(object, eformat = FALSE) {
+exhibit.MackChainLadder <- function(object) {
   # use first object in generic summary
   xhbt <- summary(object)[[1]][, 1:5]
   
@@ -205,12 +183,6 @@ exhibit.MackChainLadder <- function(object, eformat = FALSE) {
   
   # combine data frames
   xhbt <- rbind(xhbt, totals)
-  
-  class(xhbt) <- c("exhibit_MackChainLadder", "data.frame")
-  # format columns
-  if (eformat) {
-    xhbt <- eformat(xhbt)
-  }
   
   xhbt
 }

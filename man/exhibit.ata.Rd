@@ -3,16 +3,14 @@
 \alias{exhibit.ata}
 \title{Return a triangle for age to age development factors}
 \usage{
-\method{exhibit}{ata}(object, eformat = FALSE, selection = NULL,
-  tail_column = FALSE)
+\method{exhibit}{ata}(object, selection = NULL)
 }
 \arguments{
-\item{eformat}{logical; whether or not to use default exhibit format}
-
-\item{selection}{optional selected development factors}
-
-\item{tail_column}{optional column for development factor of
-most mature age to ultimate}
+\item{selection}{optional selected development factors.  Should be supplied
+as a numeric vector of the same length as the number of development periods
+in the ata development triengle or the number of developments + 1 in the ata
+development triengle, with the + 1 for the tail factor.  The tail factor can be
+used to project future development for the most mature origin years.}
 
 \item{ata}{object of class ata generated from \code{ChainLadder} package}
 }
@@ -20,10 +18,10 @@ most mature age to ultimate}
 Return a triangle for age to age development factors
 }
 \examples{
-tri <- as.triangle(recovery_ldf, origin = "origin",
+tri <- as.triangle(ldf_data, origin = "origin",
                    dev = "dev", value = "paid_loss_only")
 dev_tri <- ata(tri)
-exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, NA))
+exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075))
 
 # with tail factor selected
 exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, 1.1))
