@@ -11,3 +11,4 @@ Description: Currently the exhibit package is used for creating actuarial
     of displaying the most commonly desired information from the function
     output.
 License: MIT
+LazyData: yes

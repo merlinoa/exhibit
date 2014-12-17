@@ -11,13 +11,18 @@
 #' 
 #' @export
 #' @examples
-#' tri <- as.triangle(ldf_data, origin = "origin", 
-#'                    dev = "dev", value = "paid_loss_only")
-#' dev_tri <- ata(tri)
-#' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075))
+#' # make sure to load the ChainLadder package with
+#' # library(ChainLadder)
+#' dev_tri <- ata(RAA)
 #' 
-#' # with tail factor selected
-#' exhibit(dev_tri, selection = c(1.9, 1.2, 1.13, 1.075, 1.1))
+#' # No selected development factors
+#' exhibit(dev_tri)
+#' 
+#' # with selected development factors
+#' exhibit(dev_tri, selection = c(3.0, 1.65, 1.30, 1.2, 1.12, 1.05, 1.035, 1.015, 1.01))
+#' 
+#' # with selected development factors includeing tail factor
+#' exhibit(dev_tri, selection = c(3.0, 1.65, 1.30, 1.2, 1.12, 1.05, 1.035, 1.015, 1.01, 1.05))
 exhibit.ata <- function(object, 
                         selection = NULL) {
   
@@ -67,16 +72,13 @@ exhibit.ata <- function(object,
 #' 
 #' @export
 #' 
-#' @examples
-#' tri <- as.triangle(ldf_data, origin = "origin", 
-#'                    dev = "dev", value = "paid_loss_only")
-#'                    
-#' exhibit(tri)
+#' @examples                    
+#' exhibit(RAA)
 exhibit.triangle <- function(object) {
   
   # extract relevant data from triangle
   xhbt <- object[1:nrow(object), 1:ncol(object)]
-  names(xhbt) <- attr(object, "dimnames")[[2]]
+  colnames(xhbt) <- attr(object, "dimnames")[[2]]
   
   xhbt
 }
@@ -91,11 +93,8 @@ exhibit.triangle <- function(object) {
 #' 
 #' @export
 #' 
-#' @examples
-#' tri <- as.triangle(ldf_data, origin = "origin", 
-#'                    dev = "dev", value = "paid_loss_only")
-#'                    
-#' glm_object <- glmReserve(tri)
+#' @examples                    
+#' glm_object <- glmReserve(GenIns)
 #' 
 #' exhibit(glm_object)
 exhibit.glmReserve <- function(object) {
@@ -135,11 +134,8 @@ exhibit.glmReserve <- function(object) {
 #' 
 #' @export
 #' 
-#' @examples
-#' tri <- as.triangle(ldf_data, origin = "origin", 
-#'                    dev = "dev", value = "paid_loss_only")
-#'                    
-#' boot_object <- BootChainLadder(tri)
+#' @examples          
+#' boot_object <- BootChainLadder(RAA)
 #' 
 #' exhibit(boot_object)
 exhibit.BootChainLadder <- function(object) {
@@ -166,10 +162,8 @@ exhibit.BootChainLadder <- function(object) {
 #' @export
 #' 
 #' @examples
-#' tri <- as.triangle(ldf_data, origin = "origin", 
-#'                    dev = "dev", value = "paid_loss_only")
 #'                    
-#' mack_object <- MackChainLadder(tri)
+#' mack_object <- MackChainLadder(RAA)
 #' 
 #' exhibit(mack_object)
 exhibit.MackChainLadder <- function(object) {
