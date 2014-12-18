@@ -1,14 +1,14 @@
 Package: exhibit
 Type: Package
-Title: creates clean dataframes from function output that can be used in reports
-Version: 1.0
+Title: creates one dataframe or matrix from function output to be used in report tables
+Version: 0.0.0.9000
 Date: 2014-09-23
 Author: Andy Merlino
 Maintainer: Andy Merlino <merlinoa88@gmail.com>
-Description: Currently the exhibit package is used for creating actuarial
+Description: The exhibit package is designed for making it easier to create actuarial
     reports.  exhibit takes output from functions commonly used by actuaries
-    (e.g. functions in the ChainLadder package) and provides a nice default way
-    of displaying the most commonly desired information from the function
-    output.
-License: MIT
+    (e.g. functions in the ChainLadder package) and provides a default way
+    of summarizing the function output as a dataframe or matrix that can easily be
+    used to create a table in a pdf or html report.
+License: GPL-3
 LazyData: yes
