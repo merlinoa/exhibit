@@ -15,10 +15,7 @@
 Returns MackChainLadder summary information in a data frame
 }
 \examples{
-tri <- as.triangle(ldf_data, origin = "origin",
-                   dev = "dev", value = "paid_loss_only")
-
-mack_object <- MackChainLadder(tri)
+mack_object <- MackChainLadder(RAA)
 
 exhibit(mack_object)
 }
