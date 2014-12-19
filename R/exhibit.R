@@ -8,7 +8,6 @@
 #' @param format whether or not to use default `exhibit` format
 #' @param ... additional arguments
 #' 
- 
 #' 
 #' @export
-exhibit <- function(oject, format = TRUE, ...) UseMethod("exhibit")
+exhibit <- function(object, format = TRUE, ...) UseMethod("exhibit")
