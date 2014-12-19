@@ -12,5 +12,8 @@ Description: The exhibit package is designed for making it easier to create actu
     used to create a table in a pdf or html report.
 License: GPL-3
 LazyData: yes
+VignetteBuilder: knitr
 Imports:
     ChainLadder
+Suggests:
+    knitr
