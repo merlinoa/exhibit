@@ -1,0 +1,52 @@
+---
+title: "exhibit Introduction"
+author: "Andy Merlino"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{exhibit Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+We want to create pdf and html reports using the `ChainLadder` package reserve projection functions.  Many of the `ChainLadder` functions return complicated lists.  The exhibit package grabs the most important data from these lists and converts it into a matrix or data frame that is easy to understand and easy to display in an html or pdf report.
+
+## Examples
+
+```{r load_packages, message = FALSE}
+# load packages
+library(ChainLadder)
+library(exhibit)
+library(xtable)
+options(xtable.comment = FALSE)
+options(xtable.type = "html")
+```
+
+We are going to use the `RAA` object provided by the `ChainLadder` package. `RAA` is an S3 object of class triangle from the `ChainLadder` package.  It looks like a nice triangle when it is printed to the R console: 
+
+```{r RAA}
+RAA
+```
+
+but we want to display the triangle in an Rmarkdown report, not in the R console.
+
+Here are a few examples:
+
+```{r exhibit_triangle, results = "asis"}
+out <- exhibit(RAA)
+out <- xtable(out)
+print(out,
+  format.args = list(big.mark = ",")
+)
+```
+
+```{r mack, results = "asis"}
+RAA_mack <- MackChainLadder(RAA)
+RAA_mack_out <- exhibit(RAA_mack)
+RAA_mack_out <- xtable(RAA_mack_out,
+                  digits = c(0, 0, 2, 0, 0, 0)
+                )
+print(RAA_mack_out,
+  format.args = list(big.mark = ",")     
+)
+```
