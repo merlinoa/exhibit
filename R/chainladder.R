@@ -1,13 +1,14 @@
-#' Return a triangle for age to age development factors
+#' Returns an age to age development triangle matrix
 #' 
-#' @param ata object of class ata generated from \code{ChainLadder} package
-#' @param selection optional selected development factors.  Should be supplied
+#' @param ata object of class ata from the \code{ChainLadder} package
+#' @param selection Selected development factors.  Should be supplied
 #' as a numeric vector of the same length as the number of development periods
-#' in the ata development triengle or the number of developments + 1 in the ata
-#' development triengle, with the + 1 for the tail factor.  The tail factor can be
-#' used to project future development for the most mature origin years.
+#' in the ata development triangle or the number of development periods + 1 
+#' (the + 1 will be used as the tail factor).
 #' 
 #' @method exhibit ata
+#' 
+#' @import ChainLadder
 #' 
 #' @export
 #' @examples
@@ -63,12 +64,13 @@ exhibit.ata <- function(object,
   xhbt
 }
 
-#' Returns a cleaner development triangle for use in reports
+#' Returns a development triangle as a matrix
 #' 
 #' @param object object of class triangle generated from \code{ChainLadder} package
-#' @param eformat logical; whether or not to use default exhibit format
 #' 
 #' @method exhibit triangle
+#' 
+#' @import ChainLadder
 #' 
 #' @export
 #' 
@@ -84,12 +86,13 @@ exhibit.triangle <- function(object) {
 }
 
 
-#' Returns glmReserve summary information in a data frame
+#' Returns glmReserve summary information as a data frame
 #'
 #' @param object object of class glmReserve generated from \code{ChainLadder} package
-#' @param eformat logical; whether or not to use default exhibit format
 #' 
 #' @method exhibit glmReserve
+#' 
+#' @import ChainLadder
 #' 
 #' @export
 #' 
@@ -125,10 +128,11 @@ exhibit.glmReserve <- function(object) {
   xhbt
 }
 
-#' Returns BootChainLadder summary information in a data frame
+#' Returns BootChainLadder summary information as a data frame
 #'
 #' @param object object of class BootChainLadder generated from \code{ChainLadder} package
-#' @param eformat logical; whether or not to use default exhibit format
+#' 
+#' @import ChainLadder
 #' 
 #' @method exhibit BootChainLadder
 #' 
@@ -155,14 +159,14 @@ exhibit.BootChainLadder <- function(object) {
 #' Returns MackChainLadder summary information in a data frame
 #'
 #' @param object object of class MackChainLadder generated from \code{ChainLadder} package
-#' @param eformat whether or not to use default exhibit format
+#' 
+#' @import ChainLadder
 #' 
 #' @method exhibit MackChainLadder
 #' 
 #' @export
 #' 
 #' @examples
-#'                    
 #' mack_object <- MackChainLadder(RAA)
 #' 
 #' exhibit(mack_object)
