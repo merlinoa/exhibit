@@ -9,7 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-We want to create pdf and html reports using the `ChainLadder` package reserve projection functions.  Many of the `ChainLadder` functions return complicated lists.  The exhibit package grabs the most important data from these lists and converts it into a matrix or data frame that is easy to understand and easy to display in an html or pdf report.
+We want to create pdf and html reports using the `ChainLadder` package reserve projection functions.  Many of the `ChainLadder` functions return complicated objects.  The exhibit package grabs the most important data from these objects and converts it into a matrix or data frame that is easy to understand and easy to display in an html or pdf report.
 
 ## Examples
 
@@ -22,13 +22,31 @@ options(xtable.comment = FALSE)
 options(xtable.type = "html")
 ```
 
-We are going to use the `RAA` object provided by the `ChainLadder` package. `RAA` is an S3 object of class triangle from the `ChainLadder` package.  It looks like a nice triangle when it is printed to the R console: 
+We are going to use the `RAA` object provided by the `ChainLadder` package. `RAA` is an S3 object of class triangle from the `ChainLadder` package.  It looks like a nice triangle when it is printed to the R console. Additionally the results from the MackChainLadder function look nice when printed to the R console:
 
 ```{r RAA}
 RAA
+
+MackChainLadder(RAA)
 ```
 
-but we want to display the triangle in an Rmarkdown report, not in the R console.
+but if you try to make a table out of the triangle you end up with this
+
+```{r }
+out <- xtable(RAA)
+print(out,
+  format.args = list(big.mark = ",")      
+)
+```
+
+This is because `ChainLadder` stores more information than is shown in the R console in its classes.  The classes returned from projection methodologies can store a lot of information and can be hard to navigate.  Take a look at the structure of the class returned from the `MackChainLadder()` function:
+
+```{r}
+out <- MackChainLadder(RAA)
+str(out)
+```
+
+`ChainLadder` uses generic functions to print and summarize its classes to the R console.  This is nice if you are only printing your results to the R console, but we want to quickly display the results in an html or pdf report.  To do this we use the `exhibit()` function to grab only the information we want from the respective `ChainLadder` class and return it as a 2-dimensional matrix or data frame.
 
 Here are a few examples:
 
