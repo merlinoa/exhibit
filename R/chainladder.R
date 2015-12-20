@@ -12,8 +12,7 @@
 #' 
 #' @export
 #' @examples
-#' # make sure to load the ChainLadder package with
-#' # library(ChainLadder)
+#' library(ChainLadder)
 #' dev_tri <- ata(RAA)
 #' 
 #' # No selected development factors

@@ -18,8 +18,7 @@ in the ata development triangle or the number of development periods + 1
 Returns an age to age development triangle matrix
 }
 \examples{
-# make sure to load the ChainLadder package with
-# library(ChainLadder)
+library(ChainLadder)
 dev_tri <- ata(RAA)
 
 # No selected development factors
