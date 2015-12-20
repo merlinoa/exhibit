@@ -1,13 +1,11 @@
-#' Generic similar to summary but always creates a data frame
+#' Generic function for creating tabular data for report output
 #' 
 #' \code{exhibit} defines certain default ways to arrange 
-#' objects returned by the package \code{ChainLadder} package
-#' and \code{lossdb} package functions for presentation in a report.  
+#' objects returned by \code{ChainLadder} and other
+#' packages for presentation in a report.  
 #' 
 #' @param object object to turn into exhibit
-#' @param format whether or not to use default `exhibit` format
 #' @param ... additional arguments
 #' 
-#' 
 #' @export
-exhibit <- function(object, format = TRUE, ...) UseMethod("exhibit")
+exhibit <- function(object, ...) UseMethod("exhibit")

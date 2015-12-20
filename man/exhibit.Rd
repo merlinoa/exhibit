@@ -2,20 +2,18 @@
 % Please edit documentation in R/exhibit.R
 \name{exhibit}
 \alias{exhibit}
-\title{Generic similar to summary but always creates a data frame}
+\title{Generic function for creating tabular data for report output}
 \usage{
-exhibit(object, format = TRUE, ...)
+exhibit(object, ...)
 }
 \arguments{
 \item{object}{object to turn into exhibit}
-
-\item{format}{whether or not to use default `exhibit` format}
 
 \item{...}{additional arguments}
 }
 \description{
 \code{exhibit} defines certain default ways to arrange 
-objects returned by the package \code{ChainLadder} package
-and \code{lossdb} package functions for presentation in a report.
+objects returned by \code{ChainLadder} and other
+packages for presentation in a report.
 }
 
