@@ -15,7 +15,8 @@ License: GPL-3
 LazyData: yes
 VignetteBuilder: knitr
 Imports:
-    ChainLadder
+    ChainLadder,
+    xtable
 Suggests:
     knitr
 RoxygenNote: 5.0.1
