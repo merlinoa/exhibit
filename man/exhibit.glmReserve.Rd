@@ -13,8 +13,8 @@
 Returns glmReserve summary information as a data frame
 }
 \examples{
-                   
-glm_object <- glmReserve(GenIns)
+library(ChainLadder)                    
+glm_object <- ChainLadder::glmReserve(GenIns)
 
 exhibit(glm_object)
 }

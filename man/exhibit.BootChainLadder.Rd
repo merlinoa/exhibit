@@ -13,8 +13,8 @@
 Returns BootChainLadder summary information as a data frame
 }
 \examples{
-         
-boot_object <- BootChainLadder(RAA)
+library(ChainLadder)          
+boot_object <- ChainLadder::BootChainLadder(RAA)
 
 exhibit(boot_object)
 }

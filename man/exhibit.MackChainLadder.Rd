@@ -13,7 +13,8 @@
 Returns MackChainLadder summary information in a data frame
 }
 \examples{
-mack_object <- MackChainLadder(RAA)
+library(ChainLadder)
+mack_object <- ChainLadder::MackChainLadder(RAA)
 
 exhibit(mack_object)
 }

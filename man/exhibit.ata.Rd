@@ -7,12 +7,12 @@
 \method{exhibit}{ata}(object, selection = NULL)
 }
 \arguments{
+\item{object}{object of class ata from the \code{ChainLadder} package}
+
 \item{selection}{Selected development factors.  Should be supplied
 as a numeric vector of the same length as the number of development periods
 in the ata development triangle or the number of development periods + 1 
 (the + 1 will be used as the tail factor).}
-
-\item{ata}{object of class ata from the \code{ChainLadder} package}
 }
 \description{
 Returns an age to age development triangle matrix

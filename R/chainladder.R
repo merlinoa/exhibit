@@ -1,6 +1,6 @@
 #' Returns an age to age development triangle matrix
 #' 
-#' @param ata object of class ata from the \code{ChainLadder} package
+#' @param object object of class ata from the \code{ChainLadder} package
 #' @param selection Selected development factors.  Should be supplied
 #' as a numeric vector of the same length as the number of development periods
 #' in the ata development triangle or the number of development periods + 1 
@@ -96,8 +96,9 @@ exhibit.triangle <- function(object) {
 #' 
 #' @export
 #' 
-#' @examples                    
-#' glm_object <- glmReserve(GenIns)
+#' @examples
+#' library(ChainLadder)                    
+#' glm_object <- ChainLadder::glmReserve(GenIns)
 #' 
 #' exhibit(glm_object)
 exhibit.glmReserve <- function(object) {
@@ -138,15 +139,16 @@ exhibit.glmReserve <- function(object) {
 #' 
 #' @export
 #' 
-#' @examples          
-#' boot_object <- BootChainLadder(RAA)
+#' @examples
+#' library(ChainLadder)          
+#' boot_object <- ChainLadder::BootChainLadder(RAA)
 #' 
 #' exhibit(boot_object)
 exhibit.BootChainLadder <- function(object) {
   # use first object in generic summary
   xhbt <- summary(object)[[1]]
   
-  # retreive totals
+  # retrieve totals
   totals <- as.data.frame(t(summary(object)[[2]]))
   names(totals) <- names(xhbt)
   
@@ -167,7 +169,8 @@ exhibit.BootChainLadder <- function(object) {
 #' @export
 #' 
 #' @examples
-#' mack_object <- MackChainLadder(RAA)
+#' library(ChainLadder)
+#' mack_object <- ChainLadder::MackChainLadder(RAA)
 #' 
 #' exhibit(mack_object)
 exhibit.MackChainLadder <- function(object) {
