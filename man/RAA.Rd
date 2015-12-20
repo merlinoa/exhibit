@@ -4,7 +4,12 @@
 \name{RAA}
 \alias{RAA}
 \title{RAA triangle provided with the \code{ChainLadder} package}
+\format{An object of class \code{triangle} (inherits from \code{matrix}) with 10 rows and 10 columns.}
+\usage{
+RAA
+}
 \description{
 RAA triangle provided with the \code{ChainLadder} package
 }
+\keyword{datasets}
 

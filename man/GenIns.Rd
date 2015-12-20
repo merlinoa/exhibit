@@ -4,7 +4,12 @@
 \name{GenIns}
 \alias{GenIns}
 \title{GenIns triangle provided with the \code{ChainLadder} package}
+\format{An object of class \code{triangle} (inherits from \code{matrix}) with 10 rows and 10 columns.}
+\usage{
+GenIns
+}
 \description{
 GenIns triangle provided with the \code{ChainLadder} package
 }
+\keyword{datasets}
 
