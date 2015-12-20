@@ -9,7 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-We want to create pdf and html reports using the `ChainLadder` package reserve projection functions.  Many of the `ChainLadder` functions return complicated objects.  The exhibit package grabs the most important data from these objects and converts it into a matrix or data frame that is easy to understand and easy to display in an html or pdf report.
+We want to create pdf and html reports using the `ChainLadder` package reserve projection functions.  Many of the `ChainLadder` functions return complicated objects stored as lists.  The exhibit package grabs the most important data for presentation from these objects and converts it into a matrix or data frame that is easy to understand and easy to display in an html or pdf report.
 
 ## Examples
 
